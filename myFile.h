@@ -83,6 +83,10 @@ class Link : DataKolom {
 				else {
 					this->tambahBaris(tampung);
 				}
+
+				if (tampung.length() > this->panjang_max)
+					this->panjang_max = tampung.length();
+
 			}
 
 		}
@@ -103,13 +107,20 @@ class Link : DataKolom {
 
 		void ambilBaris(){
 			bArus = bKepala;
+			bool cekenter = false;
+
 			while(bArus != NULL){
-				if (bArus->baris == ";")
+				if (bArus->baris == ";"){
 					cout << endl;
+					cekenter = true;
+				}
 				else
 					cout << bArus->baris;
 
-				if (bArus->lanjut != NULL)
+				
+				if (cekenter)
+					cekenter = false;
+				else 
 					cout << " ";
 
 				bArus = bArus->lanjut;
@@ -117,8 +128,37 @@ class Link : DataKolom {
 			cout << endl;
 		}
 
+		void dataFrame(){
+			arus = kepala;
+			bArus = bKepala;
+			this->panjang_max += 1;
+
+			while(arus != NULL){
+				cout << arus->kolom;
+					for (int i = arus->kolom.length(); i < this->panjang_max; i++)
+						cout << " ";
+
+				arus = arus->lanjut;
+			}
+
+			cout << endl;
+			while(bArus != NULL){
+				if (bArus->baris == ";")
+					cout << endl;
+				else{
+					cout << bArus->baris;
+					for (int i = bArus->baris.length(); i < this->panjang_max; i++)
+						cout << " ";
+				}
+
+				bArus = bArus->lanjut;
+			}
+
+		}
+
 	private :
 		string namaFile;
 		ifstream bacafile;
 		string tampung;
+		int panjang_max = 0;
 };

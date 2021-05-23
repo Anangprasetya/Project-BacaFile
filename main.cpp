@@ -5,8 +5,10 @@ using namespace std;
 
 int main(){
 	Link file("test.ang");
-	file.ambilKolom();
-	file.ambilBaris();
+
+	file.ambilKolom();	// Fitur Pertama
+	file.ambilBaris();	// Fitur Kedua
+	file.dataFrame();	// Fitur Ketiga
 
 	return 0;
 }
