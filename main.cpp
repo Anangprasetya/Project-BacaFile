@@ -5,6 +5,6 @@ using namespace std;
 
 int main(){
 	Link file("test.ang");
-	file.baca();
+	file.ambilKolom();
 	return 0;
 }
