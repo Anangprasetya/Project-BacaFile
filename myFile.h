@@ -1,14 +1,21 @@
-class Data {
+class DataBaris {
+	public :
+		string baris;
+		DataBaris *kembali, *lanjut;
+};
+
+class DataKolom {
 	public :
 		string kolom;
 
-		Data *lanjut, *kembali;
+		DataKolom *lanjut, *kembali;
 
 	protected :
-		Data *kepala, *ekor, *baru, *arus;
+		DataKolom *kepala, *ekor, *baru, *arus;
+		DataBaris *bKepala, *bEkor, *bBaru, *bArus;
 
 		void buatKolom(string kolom){
-			kepala = new Data();
+			kepala = new DataKolom();
 			kepala->kolom = kolom;
 			kepala->kembali = NULL;
 			kepala->lanjut = NULL;
@@ -16,11 +23,33 @@ class Data {
 
 		}
 
+		void buatBaris(string baris){
+			bKepala = new DataBaris();
+			bKepala->baris = baris;
+			bKepala->kembali = NULL;
+			bKepala->lanjut = NULL;
+			bEkor = bKepala;
+		}
+
+		void tambahBaris(string baris){
+			if (bKepala == NULL)
+				this->buatBaris(baris);
+			else
+			{
+				bBaru = new DataBaris();
+				bBaru->baris = baris;
+				bBaru->kembali = bEkor;
+				bBaru->lanjut = NULL;
+				bEkor->lanjut = bBaru;
+				bEkor = bBaru;
+			}
+		}
+
 		void tambahKolom(string kolom){
 			if (kepala == NULL)
 				this->buatKolom(kolom);
 			else{
-				baru = new Data();
+				baru = new DataKolom();
 				baru->kolom = kolom;
 				baru->kembali = ekor;
 				baru->lanjut = NULL;
@@ -30,11 +59,12 @@ class Data {
 		}
 };
 
-class Link : Data {
+class Link : DataKolom {
 	public :
 		Link(string n){
 			this->namaFile = n;
 			kepala = NULL;
+			bKepala = NULL;
 			this->baca();
 		}
 
@@ -46,14 +76,19 @@ class Link : Data {
 				{
 					if (tampung == ";")
 						i += 1;
-					else
+					else{
 						this->tambahKolom(tampung);
+					}
+				}
+				else {
+					this->tambahBaris(tampung);
 				}
 			}
 
 		}
 
 		void ambilKolom(){
+			cout << "Kolom : ";
 			arus = kepala;
 			while(arus != NULL){
 				cout << arus->kolom;
@@ -62,6 +97,24 @@ class Link : Data {
 
 				arus = arus->lanjut;
 			}
+
+			cout << endl;
+		}
+
+		void ambilBaris(){
+			bArus = bKepala;
+			while(bArus != NULL){
+				if (bArus->baris == ";")
+					cout << endl;
+				else
+					cout << bArus->baris;
+
+				if (bArus->lanjut != NULL)
+					cout << " ";
+
+				bArus = bArus->lanjut;
+			}
+			cout << endl;
 		}
 
 	private :

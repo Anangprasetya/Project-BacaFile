@@ -6,5 +6,7 @@ using namespace std;
 int main(){
 	Link file("test.ang");
 	file.ambilKolom();
+	file.ambilBaris();
+
 	return 0;
 }
