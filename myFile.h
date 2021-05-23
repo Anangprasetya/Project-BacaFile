@@ -131,7 +131,7 @@ class Link : DataKolom {
 		void dataFrame(){
 			arus = kepala;
 			bArus = bKepala;
-			this->panjang_max += 1;
+			this->panjang_max += 2;
 
 			while(arus != NULL){
 				cout << arus->kolom;
@@ -142,6 +142,20 @@ class Link : DataKolom {
 			}
 
 			cout << endl;
+
+			arus = kepala;
+			while(arus != NULL){
+					for (int i = 0; i < arus->kolom.length(); ++i)
+						cout << "_";
+
+					for (int i = arus->kolom.length(); i < this->panjang_max; i++)
+						cout << "_";
+
+				arus = arus->lanjut;
+			}
+
+			cout << "\n\n";
+
 			while(bArus != NULL){
 				if (bArus->baris == ";")
 					cout << endl;
