@@ -63,9 +63,14 @@ class Link : DataKolom {
 	public :
 		Link(string n){
 			this->namaFile = n;
-			kepala = NULL;
-			bKepala = NULL;
-			this->baca();
+			if (this->cekNamaFile())
+				exit(0);
+			else{
+				kepala = NULL;
+				bKepala = NULL;
+				this->baca();
+			}
+
 		}
 
 		void baca(){
@@ -175,4 +180,18 @@ class Link : DataKolom {
 		ifstream bacafile;
 		string tampung;
 		int panjang_max = 0;
+
+		bool cekNamaFile(){
+			int panjang_nama = this->namaFile.length();
+			if (this->namaFile[panjang_nama - 1] == 'g' &&
+				this->namaFile[panjang_nama - 2] == 'n' &&
+				this->namaFile[panjang_nama - 3] == 'a')
+
+				return false;
+			else{
+				cout << "File bukan type ang ! \n";
+				return true;
+			}
+
+		}
 };

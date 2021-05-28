@@ -7,4 +7,4 @@ Fitur yang tersedia saat ini :
 - Mengambil Baris
 - Menampilkan dalam bentuk tabel
 
-<p>Semoga Bermanfaat</p>
+Semoga Bermanfaat
